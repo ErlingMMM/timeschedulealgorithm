@@ -22,25 +22,41 @@ class Program
 
         for (int i = 1; i < test.Count; i++)
         {
-            var previousList = test3[test.Keys.ElementAt(i - 1)];
-            var currentList = test[test.Keys.ElementAt(i)];
+            var currentKey = test.Keys.ElementAt(i);
+            var currentList = test[currentKey];
             var newList = new List<int>();
 
             for (int j = 0; j < currentList.Count; j++)
             {
-                int shiftedIndex = previousList.IndexOf(currentList[j]) + 2;
-                if (shiftedIndex >= currentList.Count)
-                {
-                    shiftedIndex -= currentList.Count;
-                }
-
+                int shiftedIndex = GetShiftedIndex(test, i, j);
                 newList.Add(currentList[shiftedIndex]);
             }
 
-            test3.Add(test.Keys.ElementAt(i), newList);
+            test3.Add(currentKey, newList);
         }
 
         // Print the test3 dictionary
         Console.WriteLine(string.Join(Environment.NewLine, test3.Select(kv => $"{kv.Key}: {string.Join(", ", kv.Value)}")));
+    }
+
+    static int GetShiftedIndex(Dictionary<string, List<int>> test, int currentIndex, int innerIndex)
+    {
+        int shiftedIndex = innerIndex;
+
+        for (int k = 0; k < currentIndex; k++)
+        {
+            var previousList = test.Values.ElementAt(k);
+            var currentValue = test.Values.ElementAt(currentIndex)[innerIndex];
+
+            int previousIndex = previousList.IndexOf(currentValue);
+            shiftedIndex += 2;
+
+            if (shiftedIndex >= previousList.Count)
+            {
+                shiftedIndex -= previousList.Count;
+            }
+        }
+
+        return shiftedIndex;
     }
 }
