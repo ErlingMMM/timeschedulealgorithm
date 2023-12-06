@@ -14,16 +14,22 @@ class Program
             { "obos", Enumerable.Range(1, 20).ToList() }
         };
 
-        var test2 = new Dictionary<string, List<int>>();
+        var test3 = new Dictionary<string, List<int>>();
 
-        foreach (var entry in test)
+        // Split the original test dictionary into several lists
+        var lists = test.Values.SelectMany(list => list.Select((value, index) => new { value, index }))
+                              .GroupBy(x => x.index % test.Count)
+                              .ToDictionary(g => g.Key.ToString(), g => g.Select(x => x.value).ToList());
+
+        var previousKey = "";
+        foreach (var entry in lists)
         {
             var newList = new List<int>();
             var seenNumbers = new HashSet<int>();
 
             foreach (var number in entry.Value)
             {
-                if (test2.Any(e => e.Value.Contains(number)))
+                if (test3.Any(e => e.Value.Contains(number) && e.Key != previousKey))
                 {
                     var shiftedNumber = number;
                     while (seenNumbers.Contains(shiftedNumber))
@@ -41,14 +47,11 @@ class Program
                 }
             }
 
-            test2.Add(entry.Key, newList);
+            test3.Add(entry.Key, newList);
+            previousKey = entry.Key;
         }
 
-        // Shift the "dnb" list in test2 by two positions
-        var dnbList = test2["dnb"];
-        test2["dnb"] = dnbList.Skip(2).Concat(dnbList.Take(2)).ToList();
-
-        // Print the test2 dictionary
-        Console.WriteLine(string.Join(Environment.NewLine, test2.Select(kv => $"{kv.Key}: {string.Join(", ", kv.Value)}")));
+        // Print the test3 dictionary
+        Console.WriteLine(string.Join(Environment.NewLine, test3.Select(kv => $"{kv.Key}: {string.Join(", ", kv.Value)}")));
     }
 }
