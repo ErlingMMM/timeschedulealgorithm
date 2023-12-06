@@ -18,6 +18,13 @@ class Program
             { "storebrand6", Enumerable.Range(1, 20).ToList() },
             { "storebrand7", Enumerable.Range(1, 20).ToList() },
             { "storebrand8", Enumerable.Range(1, 20).ToList() },
+              { "storebrand9", Enumerable.Range(1, 20).ToList() },
+            { "storebrand10", Enumerable.Range(1, 20).ToList() },
+            { "storebrand11", Enumerable.Range(1, 20).ToList() },
+            { "storebrand12", Enumerable.Range(1, 20).ToList() },
+            { "storebrand13", Enumerable.Range(1, 20).ToList() },
+            { "storebrand14", Enumerable.Range(1, 20).ToList() },
+            { "storebrand15", Enumerable.Range(1, 20).ToList() },
             { "obos", Enumerable.Range(1, 20).ToList() }
         };
 
