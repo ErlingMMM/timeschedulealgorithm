@@ -11,6 +11,13 @@ class Program
             { "fhi", Enumerable.Range(1, 20).ToList() },
             { "dnb", Enumerable.Range(1, 20).ToList() },
             { "storebrand", Enumerable.Range(1, 20).ToList() },
+            { "storebrand2", Enumerable.Range(1, 20).ToList() },
+            { "storebrand3", Enumerable.Range(1, 20).ToList() },
+            { "storebrand4", Enumerable.Range(1, 20).ToList() },
+            { "storebrand5", Enumerable.Range(1, 20).ToList() },
+            { "storebrand6", Enumerable.Range(1, 20).ToList() },
+            { "storebrand7", Enumerable.Range(1, 20).ToList() },
+            { "storebrand8", Enumerable.Range(1, 20).ToList() },
             { "obos", Enumerable.Range(1, 20).ToList() }
         };
 
