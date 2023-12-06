@@ -21,6 +21,12 @@ class Program
             { "obos", Enumerable.Range(1, 20).ToList() }
         };
 
+        // Calculate the maximum possible combination of keys and values
+        int maxCombination = test.Values.Max(list => list.Count) * test.Count;
+
+        // Determine the shift value based on the maximum combination
+        int shift = maxCombination >= 3 ? 3 : (maxCombination == 2 ? 2 : 1);
+
         var test3 = new Dictionary<string, List<int>>();
 
         // Populate the first list as is
@@ -35,7 +41,7 @@ class Program
 
             for (int j = 0; j < currentList.Count; j++)
             {
-                int shiftedIndex = GetShiftedIndex(test, i, j);
+                int shiftedIndex = GetShiftedIndex(test, i, j, shift);
                 newList.Add(currentList[shiftedIndex]);
             }
 
@@ -46,7 +52,7 @@ class Program
         Console.WriteLine(string.Join(Environment.NewLine, test3.Select(kv => $"{kv.Key}: {string.Join(", ", kv.Value)}")));
     }
 
-    static int GetShiftedIndex(Dictionary<string, List<int>> test, int currentIndex, int innerIndex)
+    static int GetShiftedIndex(Dictionary<string, List<int>> test, int currentIndex, int innerIndex, int shift)
     {
         int shiftedIndex = innerIndex;
 
@@ -56,7 +62,7 @@ class Program
             var currentValue = test.Values.ElementAt(currentIndex)[innerIndex];
 
             int previousIndex = previousList.IndexOf(currentValue);
-            shiftedIndex += 2;
+            shiftedIndex += shift;
 
             if (shiftedIndex >= previousList.Count)
             {
