@@ -6,36 +6,38 @@ class Program
 {
     static void Main()
     {
-        var test = new Dictionary<string, List<string>>
+        var test = new Dictionary<string, List<int>>
         {
-            { "fhi", new List<string> { "trym", "erling", "tom", "name1", "name2", "name3", "name4", "name5", "name6", "name7", "name8", "name9", "name10", "name11", "name12", "name13", "name14", "name15", "name16", "name17", "name18", "name19", "name20" } },
-            { "dnb", new List<string> { "trym", "erling", "tom", "name1", "name2", "name3", "name4", "name5", "name6", "name7", "name8", "name9", "name10", "name11", "name12", "name13", "name14", "name15", "name16", "name17", "name18", "name19", "name20" } }
+            { "fhi", Enumerable.Range(1, 20).ToList() },
+            { "dnb", Enumerable.Range(1, 20).ToList() },
+            { "storebrand", Enumerable.Range(1, 20).ToList() },
+            { "obos", Enumerable.Range(1, 20).ToList() }
         };
 
-        var test2 = new Dictionary<string, List<string>>();
+        var test2 = new Dictionary<string, List<int>>();
 
         foreach (var entry in test)
         {
-            var newList = new List<string>();
-            var seenNames = new HashSet<string>();
+            var newList = new List<int>();
+            var seenNumbers = new HashSet<int>();
 
-            foreach (var name in entry.Value)
+            foreach (var number in entry.Value)
             {
-                if (test2.Any(e => e.Value.Contains(name)))
+                if (test2.Any(e => e.Value.Contains(number)))
                 {
-                    var shiftedName = name;
-                    while (seenNames.Contains(shiftedName))
+                    var shiftedNumber = number;
+                    while (seenNumbers.Contains(shiftedNumber))
                     {
-                        shiftedName += "_shifted";
+                        shiftedNumber++;
                     }
 
-                    newList.Add(shiftedName);
-                    seenNames.Add(shiftedName);
+                    newList.Add(shiftedNumber);
+                    seenNumbers.Add(shiftedNumber);
                 }
                 else
                 {
-                    newList.Add(name);
-                    seenNames.Add(name);
+                    newList.Add(number);
+                    seenNumbers.Add(number);
                 }
             }
 
