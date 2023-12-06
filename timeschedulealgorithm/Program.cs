@@ -16,39 +16,28 @@ class Program
 
         var test3 = new Dictionary<string, List<int>>();
 
-        // Split the original test dictionary into several lists
-        var lists = test.Values.SelectMany(list => list.Select((value, index) => new { value, index }))
-                              .GroupBy(x => x.index % test.Count)
-                              .ToDictionary(g => g.Key.ToString(), g => g.Select(x => x.value).ToList());
+        // Populate the first list as is
+        var firstList = test.Values.First();
+        test3.Add(test.Keys.First(), firstList);
 
-        var previousKey = "";
-        foreach (var entry in lists)
+        for (int i = 1; i < test.Count; i++)
         {
+            var previousList = test3[test.Keys.ElementAt(i - 1)];
+            var currentList = test[test.Keys.ElementAt(i)];
             var newList = new List<int>();
-            var seenNumbers = new HashSet<int>();
 
-            foreach (var number in entry.Value)
+            for (int j = 0; j < currentList.Count; j++)
             {
-                if (test3.Any(e => e.Value.Contains(number) && e.Key != previousKey))
+                int shiftedIndex = previousList.IndexOf(currentList[j]) + 2;
+                if (shiftedIndex >= currentList.Count)
                 {
-                    var shiftedNumber = number;
-                    while (seenNumbers.Contains(shiftedNumber))
-                    {
-                        shiftedNumber++;
-                    }
+                    shiftedIndex -= currentList.Count;
+                }
 
-                    newList.Add(shiftedNumber);
-                    seenNumbers.Add(shiftedNumber);
-                }
-                else
-                {
-                    newList.Add(number);
-                    seenNumbers.Add(number);
-                }
+                newList.Add(currentList[shiftedIndex]);
             }
 
-            test3.Add(entry.Key, newList);
-            previousKey = entry.Key;
+            test3.Add(test.Keys.ElementAt(i), newList);
         }
 
         // Print the test3 dictionary
