@@ -6,7 +6,7 @@ class Program
 {
     static void Main()
     {
-        var test = new Dictionary<string, List<int>>
+        var DUMMY_DATA = new Dictionary<string, List<int>>
         {
             { "fhi", Enumerable.Range(1, 20).ToList() },
             { "dnb", Enumerable.Range(1, 20).ToList() },
@@ -39,45 +39,44 @@ class Program
         };
 
         // Calculate the maximum possible combination of keys and values
-        int maxCombination = test.Values.Max(list => list.Count) * test.Count;
+        int maxCombination = DUMMY_DATA.Values.Max(list => list.Count) * DUMMY_DATA.Count;
 
         // Determine the shift value based on the maximum combination
         int shift = maxCombination >= 3 ? 3 : (maxCombination == 2 ? 2 : 1);
 
-        var test3 = new Dictionary<string, List<int>>();
+        var sortedList = new Dictionary<string, List<int>>();
 
         // Populate the first list as is
-        var firstList = test.Values.First();
-        test3.Add(test.Keys.First(), firstList);
+        var firstList = DUMMY_DATA.Values.First();
+        sortedList.Add(DUMMY_DATA.Keys.First(), firstList);
 
-        for (int i = 1; i < test.Count; i++)
+        for (int i = 1; i < DUMMY_DATA.Count; i++)
         {
-            var currentKey = test.Keys.ElementAt(i);
-            var currentList = test[currentKey];
+            var currentKey = DUMMY_DATA.Keys.ElementAt(i);
+            var currentList = DUMMY_DATA[currentKey];
             var newList = new List<int>();
 
             for (int j = 0; j < currentList.Count; j++)
             {
-                int totalShift = GetTotalShift(test, i, j, shift);
+                int totalShift = GetTotalShift(DUMMY_DATA, i, j, shift);
                 int shiftedIndex = (j + totalShift) % currentList.Count;
                 newList.Add(currentList[shiftedIndex]);
             }
 
-            test3.Add(currentKey, newList);
+            sortedList.Add(currentKey, newList);
         }
 
-        // Print the test3 dictionary
-        Console.WriteLine(string.Join(Environment.NewLine, test3.Select(kv => $"{kv.Key}: {string.Join(", ", kv.Value)}")));
+        Console.WriteLine(string.Join(Environment.NewLine, sortedList.Select(kv => $"{kv.Key}: {string.Join(", ", kv.Value)}")));
     }
 
-    static int GetTotalShift(Dictionary<string, List<int>> test, int currentIndex, int innerIndex, int shift)
+    static int GetTotalShift(Dictionary<string, List<int>> unsortedList, int currentIndex, int innerIndex, int shift)
     {
         int totalShift = 0;
 
         for (int k = 0; k < currentIndex; k++)
         {
-            var previousList = test.Values.ElementAt(k);
-            var currentValue = test.Values.ElementAt(currentIndex)[innerIndex];
+            var previousList = unsortedList.Values.ElementAt(k);
+            var currentValue = unsortedList.Values.ElementAt(currentIndex)[innerIndex];
 
             int previousIndex = previousList.IndexOf(currentValue);
             totalShift += shift;
