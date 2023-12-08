@@ -14,16 +14,24 @@ class Program
             { "storebrand2", Enumerable.Range(1, 20).ToList() },
             { "storebrand3", Enumerable.Range(1, 20).ToList() },
             { "storebrand4", Enumerable.Range(1, 20).ToList() },
+            { "java1", Enumerable.Range(21, 20).ToList() },
+
             { "storebrand5", Enumerable.Range(1, 20).ToList() },
+                        { "java3", Enumerable.Range(21, 20).ToList() },
+
             { "storebrand6", Enumerable.Range(1, 20).ToList() },
             { "storebrand7", Enumerable.Range(1, 20).ToList() },
             { "storebrand8", Enumerable.Range(1, 20).ToList() },
-              { "storebrand9", Enumerable.Range(1, 20).ToList() },
+            { "java2", Enumerable.Range(21, 20).ToList() },
+            { "storebrand9", Enumerable.Range(1, 20).ToList() },
             { "storebrand10", Enumerable.Range(1, 20).ToList() },
+            { "java5", Enumerable.Range(21, 20).ToList() },
             { "storebrand11", Enumerable.Range(1, 20).ToList() },
             { "storebrand12", Enumerable.Range(1, 20).ToList() },
             { "storebrand13", Enumerable.Range(1, 20).ToList() },
             { "storebrand14", Enumerable.Range(1, 20).ToList() },
+            { "java6", Enumerable.Range(21, 20).ToList() },
+            { "java7", Enumerable.Range(21, 20).ToList() },
             { "storebrand15", Enumerable.Range(1, 20).ToList() },
             { "obos", Enumerable.Range(1, 20).ToList() }
         };
@@ -48,7 +56,8 @@ class Program
 
             for (int j = 0; j < currentList.Count; j++)
             {
-                int shiftedIndex = GetShiftedIndex(test, i, j, shift);
+                int totalShift = GetTotalShift(test, i, j, shift);
+                int shiftedIndex = (j + totalShift) % currentList.Count;
                 newList.Add(currentList[shiftedIndex]);
             }
 
@@ -59,9 +68,9 @@ class Program
         Console.WriteLine(string.Join(Environment.NewLine, test3.Select(kv => $"{kv.Key}: {string.Join(", ", kv.Value)}")));
     }
 
-    static int GetShiftedIndex(Dictionary<string, List<int>> test, int currentIndex, int innerIndex, int shift)
+    static int GetTotalShift(Dictionary<string, List<int>> test, int currentIndex, int innerIndex, int shift)
     {
-        int shiftedIndex = innerIndex;
+        int totalShift = 0;
 
         for (int k = 0; k < currentIndex; k++)
         {
@@ -69,14 +78,9 @@ class Program
             var currentValue = test.Values.ElementAt(currentIndex)[innerIndex];
 
             int previousIndex = previousList.IndexOf(currentValue);
-            shiftedIndex += shift;
-
-            if (shiftedIndex >= previousList.Count)
-            {
-                shiftedIndex -= previousList.Count;
-            }
+            totalShift += shift;
         }
 
-        return shiftedIndex;
+        return totalShift;
     }
 }
