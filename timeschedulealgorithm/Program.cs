@@ -12,37 +12,49 @@ class Program
             { "dnb", Enumerable.Range(1, 20).ToList() },
             { "storebrand", Enumerable.Range(1, 22).ToList() },
             { "storebrand2", Enumerable.Range(1, 23).ToList() },
-            { "storebrand3", Enumerable.Range(1, 25).ToList() },
+            { "storebrand3", Enumerable.Range(1, 24).ToList() },
             { "storebrand4", Enumerable.Range(1, 20).ToList() },
-            { "java1", Enumerable.Range(21, 20).ToList() },
+          //  { "java1", Enumerable.Range(21, 20).ToList() },
 
             { "storebrand5", Enumerable.Range(1, 20).ToList() },
-                        { "java3", Enumerable.Range(21, 20).ToList() },
+         //            { "java3", Enumerable.Range(21, 20).ToList() },
 { "dnb2", new List<int> { 1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 25,30 } },
 
             { "storebrand6", Enumerable.Range(1, 20).ToList() },
             { "storebrand7", Enumerable.Range(1, 20).ToList() },
             { "storebrand8", Enumerable.Range(3, 21).ToList() },
-            { "java2", Enumerable.Range(21, 20).ToList() },
+          //  { "java2", Enumerable.Range(21, 20).ToList() },
             { "storebrand9", Enumerable.Range(1, 20).ToList() },
             { "storebrand10", Enumerable.Range(1, 20).ToList() },
-            { "java5", Enumerable.Range(21, 20).ToList() },
+          //  { "java5", Enumerable.Range(21, 20).ToList() },
             { "storebrand11", Enumerable.Range(1, 20).ToList() },
             { "storebrand12", Enumerable.Range(1, 20).ToList() },
-            { "storebrand13", Enumerable.Range(1, 20).ToList() },
-            { "storebrand14", Enumerable.Range(1, 20).ToList() },
-            { "java6", Enumerable.Range(21, 20).ToList() },
-            { "java7", Enumerable.Range(21, 20).ToList() },
-           // { "storebrand15", Enumerable.Range(1, 20).ToList() },   to many keys
-           // { "obos2", Enumerable.Range(1, 20).ToList() },
-           // { "obos", Enumerable.Range(1, 20).ToList() }
+            { "storebrand13", Enumerable.Range(1, 20).ToList() },              //to many keys
+
+            { "storebrand14", Enumerable.Range(1, 20).ToList() },             //to many keys
+
+          //  { "java6", Enumerable.Range(21, 20).ToList() },
+          //  { "java7", Enumerable.Range(21, 20).ToList() },
+            //to many keys
+            { "storebrand15", Enumerable.Range(1, 20).ToList() },
+            { "obos2", Enumerable.Range(1, 20).ToList() },
+           { "obos", Enumerable.Range(1, 20).ToList() },
+            //  { "java8", Enumerable.Range(21, 20).ToList() },
+              //          { "java9", Enumerable.Range(21, 20).ToList() },
+                //        { "java10", Enumerable.Range(21, 20).ToList() },
+               //         { "java11", Enumerable.Range(21, 20).ToList() },
+                //        { "java12", Enumerable.Range(21, 20).ToList() }
         };
 
+
+
+
         // Calculate the maximum possible combination of keys and values
-        int maxCombination = DUMMY_DATA.Values.Max(list => list.Count) * DUMMY_DATA.Count;
+        //int maxCombination = DUMMY_DATA.Values.Max(list => list.Count) * DUMMY_DATA.Count;
 
         // Determine the shift value based on the maximum combination
-        int shift = maxCombination >= 3 ? 3 : (maxCombination == 2 ? 2 : 1);
+        //int shift = maxCombination >= 3 ? 3 : (maxCombination == 2 ? 2 : 1);
+        int shift = 1;
 
         var sortedList = new Dictionary<string, List<int>>();
 
